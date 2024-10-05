@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FitFlex Fitness</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* index.html styles */
+        .index-body {
+            position: relative;
+            background: url('images/banner1.jpg') no-repeat center center fixed;
+            background-size: cover;
+            width: 100%;
+            height: 100vh;
+            color: white;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7); /* Overlay with transparency */
+            z-index: 1;
+        }
+
+        header {
+            width: 100%;
+            height: 80px;
+            background-color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 40px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: fixed;
+            top: 0;
+            z-index: 2;
+            color: black;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            margin: 0;
+            font-size: 24px;
+            margin-right: 20px;
+        }
+
+        .header-center {
+            display: flex;
+            align-items: center;
+            margin: 0 auto;
+        }
+
+        .header-center button {
+            background-color: transparent; /* Transparent background */
+            border: none;
+            padding: 15px 25px; /* Adjusted padding */
+            cursor: pointer;
+            color: black;
+            font-size: 18px;
+            font-weight: bold;
+            transition: color 0.3s ease; /* Smooth color transition */
+            margin: 0 20px; /* Added margin */
+        }
+
+        .header-center button:hover {
+            color: #6b6b6b; /* Dark grey hover effect */
+        }
+
+        .header-right {
+            display: flex;
+            margin-left: auto; /* Adjust to align right */
+        }
+
+        .header-right button {
+            margin-left: 10px;
+            background-color: transparent;
+            border: 2px solid black;
+            padding: 15px 25px; /* Adjusted padding */
+            cursor: pointer;
+            color: black;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .header-right button:first-child {
+            margin-right: 10px;
+        }
+
+        .header-right button:last-child {
+            margin-left: 5px; /* Adjusted left margin */
+        }
+
+        .header-right button:hover {
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        main.index-main {
+            position: relative;
+            text-align: center;
+            color: white;
+            z-index: 3;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: calc(100vh - 80px);
+        }
+
+        main.index-main h1 {
+            margin: 0;
+            font-size: 48px;
+            overflow: hidden; /* Ensures text doesn't overflow */
+            white-space: nowrap; /* Prevents wrapping */
+            animation: typing 4s steps(40, end), blink-caret 0.75s step-end infinite;
+        }
+
+        main.index-main p {
+            font-size: 24px;
+            max-width: 600px;
+            margin: 20px 0 0;
+        }
+
+        /* landingpage.html styles */
+        .landingpage-body {
+            padding-top: 100px;
+            background-color: #e0f7fa;
+            color: black;
+        }
+
+        .main-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .left-section {
+            text-align: left;
+            margin-right: 50px;
+        }
+
+        .left-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .left-section p {
+            font-size: 24px;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+
+        .fitflex-banner {
+            max-width: 100%;
+            height: auto;
+            max-height: 400px;
+            margin-top: 20px;
+            opacity: 0; /* Start hidden */
+            transition: opacity 0.5s ease; /* Smooth opacity transition */
+        }
+
+        .fitflex-banner.visible {
+            opacity: 1; /* Show when visible */
+        }
+
+        .slideshow-container {
+            max-width: 600px;
+            text-align: left;
+            position: relative;
+        }
+
+        .slideshow-container h2 {
+            font-size: 16px;
+            margin-bottom: 10px;
+            font-weight: normal;
+        }
+
+        .get-started-btn {
+            padding: 15px 25px; /* Adjusted padding */
+            background-color: rgb(33, 68, 67);
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+        .get-started-btn:hover {
+            background-color: #444;
+        }
+
+        .slideshow {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            height: 300px;
+            margin-top: 20px;
+        }
+
+        .slide {
+            width: 100%;
+            display: none;
+        }
+
+        .active {
+            display: block;
+        }
+
+        /* Typed animation */
+        @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white }
+        }
+
+        /* About Us styles */
+        .aboutus-body {
+            padding-top: 100px;
+            background-color: #ffffff;
+            color: black;
+        }
+
+        .aboutus-content {
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .aboutus-image {
+            max-width: 100%;
+            height: auto;
+            margin-right: 50px;
+        }
+
+        .aboutus-text {
+            text-align: left;
+        }
+
+        .aboutus-text h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .aboutus-text p {
+            font-size: 24px;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+    </style>
+</head>
+<body>
+    <div class="index-body">
+        <div class="overlay"></div>
+        <header>
+            <div class="header-left">
+                <h1>FitFlex</h1>
+            </div>
+            <div class="header-center">
+                <button>Home</button>
+                <button>Features</button>
+                <button>About Us</button>
+                <button>Blog</button>
+            </div>
+            <div class="header-right">
+                <button style="margin-left: -5px;">Sign In</button>
+                <button style="margin-left: -5px;">Sign Up</button>
+            </div>
+        </header>
+
+        <main class="index-main">
+            <h1>Welcome to FitFlex!</h1>
+            <p>FitFlex Fitness is dedicated to helping you achieve your fitness goals. Our personalized training programs, nutrition advice, and motivational tips will empower you to live a healthier life. Join our community of fitness enthusiasts today!</p>
+        </main>
+    </div>
+
+    <main class="landingpage-body">
+        <section class="main-content">
+            <div class="left-section">
+                <h2 class="typed-text">FitFlex is here to help you</h2>
+                <p>Achieve Your Fitness Goals with Personalized Training and Nutrition Plans.</p>
+                <img src="images/banner.png" alt="FitFlex Banner" class="fitflex-banner">
+            </div>
+            <div class="slideshow-container">
+                <h2>Join FitFlex Fitness and transform your life with expert guidance and a supportive community with fitness challenges, webinars, and all that you need.</h2>
+                <button class="get-started-btn">Get Started Today →</button>
+                <div class="slideshow">
+                    <img src="images/banner2.jpg" class="slide">
+                    <img src="images/banner3.jpg" class="slide">
+                    <img src="images/banner6.jpg" class="slide">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <main class="aboutus-body">
+        <section class="aboutus-content">
+            <img src="images/banner0.jpg" alt="About Us Image" class="aboutus-image">
+            <div class="aboutus-text">
+                <h2>About Us</h2>
+                <p>FitFlex Fitness is dedicated to helping you achieve your fitness goals. Our personalized training programs, nutrition advice, and motivational tips will empower you to live a healthier life. Join our community of fitness enthusiasts today!</p>
+            <p> Our mission at FitFlex is simple: to empower individuals of all fitness levels with the tools, guidance, and motivation they need to succeed. We offer personalized training programs tailored to your specific goals, whether it's weight loss, muscle gain, or overall wellness.</p>
+        <p> Discover the FitFlex difference today and embark on a journey to a healthier, fitter you. FitFlex Fitness is here to inspire, motivate, and guide you towards your fitness aspirations.
+
+        </p>   
+        </div>
+        </section>
+    </main>
+
+    <script>
+        // JavaScript code for index.html functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            const buttons = document.querySelectorAll('.header-center button');
+            const banner = document.querySelector('.fitflex-banner');
+            const slides = document.querySelectorAll('.slide');
+            let currentSlide = 0;
+
+            // Add event listeners to the buttons
+            buttons.forEach(button => {
+                button.addEventListener('click', function () {
+                    const buttonText = this.textContent.trim().toLowerCase();
+                    window.location.href = buttonText === 'about us' ? 'aboutus.html' : `${buttonText}.html`;
+                });
+            });
+
+            // Function to show the current slide
+            function showSlide(index) {
+                slides.forEach((slide, i) => {
+                    slide.style.display = i === index ? 'block' : 'none';
+                });
+            }
+
+            // Initial call to show the first slide
+            showSlide(currentSlide);
+
+            // Set an interval to change the slide every 3 seconds
+            setInterval(() => {
+                currentSlide = (currentSlide + 1) % slides.length;
+                showSlide(currentSlide);
+            }, 3000);
+
+            // Add scroll event listener to reveal the banner image
+            window.addEventListener('scroll', function () {
+                const scrollPosition = window.scrollY || window.pageYOffset;
+                if (scrollPosition > 0) {
+                    banner.classList.add('visible');
+                } else {
+                    banner.classList.remove('visible');
+                }
+            });
+        });
+   
+    </script>
+
+
+
+
+<footer>
+    <div class="footer-section">
+        <h3>Resources</h3>
+        <ul>
+            <li>Personal Training</li>
+            <li>Dietary Advice</li>
+            <li>Dietary Advice</li>
+            <li>Fitness Challenges</li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Useful Links</h3>
+        <ul>
+            <li>Home</li>
+            <li>Services</li>
+            <li>Blog</li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Contact Us</h3>
+        <ul>
+            <li></li>
+            <li>info@fitflexfitness.com</li>
+            <li>456 Fitness Plaza, Sunshine Boulevard NY </li>
+            <li>+21342499486</li>
+        </ul>
+    </div>
+    <div class="footer-section">
+        <h3>Social Links</h3>
+        <div class="social-links">
+            <a href="#"><img src="images/facebook.png" alt="Facebook"></a>
+            <a href="#"><img src="images/twitter.png" alt="Twitter"></a>
+            <a href="#"><img src="images/instagram.png" alt="Instagram"></a>
+            <a href="#"><img src="images/google.png" alt="Google"></a>
+        </div>
+    </div>
+</footer>
+
+<style>
+    footer {
+        background-color: #f8f8f8;
+        color: #333;
+        padding: 40px;
+        display: flex;
+        justify-content: space-between;
+        text-align: left;
+        border-top: 1px solid #e7e7e7;
+    }
+
+    .footer-section {
+        flex: 1;
+        margin: 0 20px;
+    }
+
+    .footer-section h3 {
+        font-size: 18px;
+        margin-bottom: 15px;
+        font-weight: bold;
+    }
+
+    .footer-section ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    .footer-section ul li {
+        margin-bottom: 10px;
+        font-size: 16px; /* Increased font size */
+    }
+
+    .social-links {
+        display: flex;
+    }
+
+    .social-links a {
+        margin: 0 10px;
+        display: inline-block;
+    }
+
+    .social-links img {
+        width: 32px;
+        height: 32px;
+        opacity: 0.7;
+    }
+
+    .social-links img:hover {
+        opacity: 1;
+    }
+</style>
+
+</body>
+</html>
